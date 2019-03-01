@@ -215,6 +215,7 @@ void RosbagWriter::eventsCallback(const EventsVector& events)
 
 void RosbagWriter::poseCallback(const Transformation& T_W_B,
                                 const TransformationVector& T_W_Cs,
+                                const std::vector<Transformation>& T_W_OBJ_,
                                 Time t)
 {
   if(T_W_Cs.size() != num_cameras_)
@@ -228,6 +229,14 @@ void RosbagWriter::poseCallback(const Transformation& T_W_B,
   transform_stamped_msg.header.frame_id = "map";
   transform_stamped_msg.header.stamp = toRosTime(t);
   tf::tfMessage tf_msg;
+
+  for(size_t i=0; i<T_W_OBJ_.size(); ++i)
+  {
+    std::stringstream ss_obj;
+    ss_obj << "/obj" << i << "/pose";
+    tf::poseStampedKindrToMsg(T_W_OBJ_[i], toRosTime(t), "map", &pose_stamped_msg);
+    bag_.write(ss_obj.str(), toRosTime(t), pose_stamped_msg);
+  }
 
   for(size_t i=0; i<num_cameras_; ++i)
   {

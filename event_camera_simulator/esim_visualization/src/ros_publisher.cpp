@@ -295,6 +295,7 @@ void RosPublisher::eventsCallback(const EventsVector& events)
 
 void RosPublisher::poseCallback(const Transformation& T_W_B,
                                 const TransformationVector& T_W_Cs,
+                                const std::vector<Transformation>& T_W_OBJ_,
                                 Time t)
 {
   if(T_W_Cs.size() != num_cameras_)

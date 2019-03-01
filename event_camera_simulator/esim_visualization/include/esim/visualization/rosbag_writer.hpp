@@ -18,7 +18,7 @@ public:
   virtual void depthmapCallback(const DepthmapPtrVector& depthmaps, Time t) override;
   virtual void opticFlowCallback(const OpticFlowPtrVector& optic_flows, Time t) override;
   virtual void eventsCallback(const EventsVector& events) override;
-  virtual void poseCallback(const Transformation& T_W_B, const TransformationVector& T_W_Cs, Time t) override;
+  virtual void poseCallback(const Transformation& T_W_B, const TransformationVector& T_W_Cs, const std::vector<Transformation>& T_W_OBJ_, Time t) override;
   virtual void twistCallback(const AngularVelocityVector& ws, const LinearVelocityVector& vs, Time t) override;
   virtual void imuCallback(const Vector3& acc, const Vector3& gyr, Time t) override;
   virtual void cameraInfoCallback(const ze::CameraRig::Ptr& camera_rig, Time t) override;

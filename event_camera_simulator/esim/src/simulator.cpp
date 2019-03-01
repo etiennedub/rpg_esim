@@ -70,6 +70,7 @@ void Simulator::publishData(const SimulatorData& sim_data,
   const Transformation& T_W_B = sim_data.groundtruth.T_W_B;
   const TransformationVector& T_W_Cs = sim_data.groundtruth.T_W_Cs;
   const ze::CameraRig::Ptr& camera_rig = sim_data.camera_rig;
+  const std::vector<Transformation>& T_W_OBJ_ = sim_data.groundtruth.T_W_OBJ_;
 
   // Publish the new data (events, images, depth maps, poses, point clouds, etc.)
   if(!events.empty())
@@ -80,7 +81,7 @@ void Simulator::publishData(const SimulatorData& sim_data,
   if(sim_data.poses_updated)
   {
     for(const Publisher::Ptr& publisher : publishers_)
-      publisher->poseCallback(T_W_B, T_W_Cs, time);
+      publisher->poseCallback(T_W_B, T_W_Cs, T_W_OBJ_, time);
   }
   if(sim_data.twists_updated)
   {
