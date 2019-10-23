@@ -24,6 +24,6 @@ void main()
 
 
     FragColor =
-          MaterialColor * 0.3 // ambient
-        + MaterialColor * 0.7 * diffuse;
+          MaterialColor * 0.8 // ambient
+        + MaterialColor * 0.2 * diffuse;
 }
